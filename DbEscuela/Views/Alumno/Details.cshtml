@@ -1,0 +1,82 @@
+﻿@model DbEscuela.Models.Tb_Alumno
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Alumno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Alumno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Alumno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidoPaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidoPaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidoMaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidoMaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeNacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Carrera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Carrera)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Alumno }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

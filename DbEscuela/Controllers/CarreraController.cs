@@ -2,56 +2,47 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace DbEscuela.Controllers
 {
-    public class AlumnoController : Controller
+    public class CarreraController : Controller
     {
-        // GET: Alumno
+        // GET: Carrera
         public ActionResult Index()
         {
             using (DbModel1 context = new DbModel1())
             {
-                var alumnos = context.Tb_Alumno.Include(a =>a.Tb_Carrera).ToList();
-                return View(alumnos);
+                return View(context.Tb_Carrera.ToList());
             }
         }
 
-        // GET: Alumno/Details/5
+        // GET: Carrera/Details/5
         public ActionResult Details(int id)
         {
             using (DbModel1 context = new DbModel1())
             {
-                return View(context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault());
+                return View(context.Tb_Carrera.Where(x=>x.ID_Carrera == id).FirstOrDefault());
             }
-
         }
 
-        // GET: Alumno/Create
+        // GET: Carrera/Create
         public ActionResult Create()
         {
-            using (DbModel1 context = new DbModel1())
-            {
-                /*Viewbag pasar datos del controlador a la vista*/
-                ViewBag.ID_CARRERA = new SelectList(context.Tb_Carrera.ToList(), "ID_Carrera", "Carrera");
-                return View();
-            }
-
+            return View();
         }
 
-        // POST: Alumno/Create
+        // POST: Carrera/Create
         [HttpPost]
-        public ActionResult Create(Tb_Alumno tb_Alumno)
+        public ActionResult Create(Tb_Carrera tb_Carrera)
         {
             try
             {
                 using (DbModel1 context = new DbModel1())
                 {
-                    context.Tb_Alumno.Add(tb_Alumno);
+                    context.Tb_Carrera.Add(tb_Carrera);
                     context.SaveChanges();
                 }
 
@@ -63,26 +54,24 @@ namespace DbEscuela.Controllers
             }
         }
 
-        // GET: Alumno/Edit/5
+        // GET: Carrera/Edit/5
         public ActionResult Edit(int id)
         {
             using (DbModel1 context = new DbModel1())
             {
-                var alumno = context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault();
-                ViewBag.ID_CARRERA = new SelectList(context.Tb_Carrera.ToList(), "ID_Carrera", "Carrera", alumno.ID_CARRERA);
-                return View(alumno);
+                return View(context.Tb_Carrera.Where(x=>x.ID_Carrera == id).FirstOrDefault());
             }
         }
 
-        // POST: Alumno/Edit/5
+        // POST: Carrera/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Tb_Alumno tb_Alumno)
+        public ActionResult Edit(int id, Tb_Carrera tb_Carrera)
         {
             try
             {
                 using (DbModel1 context = new DbModel1())
                 {
-                    context.Entry(tb_Alumno).State = EntityState.Modified;
+                    context.Entry(tb_Carrera).State = EntityState.Modified;
                     context.SaveChanges();
                 }
 
@@ -94,16 +83,16 @@ namespace DbEscuela.Controllers
             }
         }
 
-        // GET: Alumno/Delete/5
+        // GET: Carrera/Delete/5
         public ActionResult Delete(int id)
         {
             using (DbModel1 context = new DbModel1())
             {
-                return View(context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault());
+                return View(context.Tb_Carrera.Where(x => x.ID_Carrera == id).FirstOrDefault());
             }
         }
 
-        // POST: Alumno/Delete/5
+        // POST: Carrera/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -111,9 +100,10 @@ namespace DbEscuela.Controllers
             {
                 using (DbModel1 context = new DbModel1())
                 {
-                    Tb_Alumno tb_Alumno = context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault();
-                    context.Tb_Alumno.Remove(tb_Alumno);
+                    Tb_Carrera tb_Carrera = context.Tb_Carrera.Where(x => x.ID_Carrera == id).FirstOrDefault();
+                    context.Tb_Carrera.Remove(tb_Carrera);
                     context.SaveChanges();
+
                 }
 
                 return RedirectToAction("Index");

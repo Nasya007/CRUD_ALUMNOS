@@ -13,10 +13,10 @@ namespace DbEscuela.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DbModels : DbContext
+    public partial class DbModel1 : DbContext
     {
-        public DbModels()
-            : base("name=DbModel")
+        public DbModel1()
+            : base("name=DbModel1")
         {
         }
     
@@ -26,5 +26,6 @@ namespace DbEscuela.Models
         }
     
         public DbSet<Tb_Alumno> Tb_Alumno { get; set; }
+        public DbSet<Tb_Carrera> Tb_Carrera { get; set; }
     }
 }

@@ -33,44 +33,42 @@
             @Html.DisplayNameFor(model => model.FechaDeNacimiento)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Carrera)
+            Carrera
         </th>
         <th>Acciones</th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_Alumno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoControl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApellidoPaterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApellidoMaterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaDeNacimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Carrera)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID_Alumno }, new { @class = "btn btn-warning" }) |
-                @Html.ActionLink("Detalle", "Details", new { id = item.ID_Alumno }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_Alumno }, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ID_Alumno)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NoControl)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombres)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Activo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaDeNacimiento)
+    </td>
+    <td>@item.Tb_Carrera.Carrera</td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.ID_Alumno }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Detalle", "Details", new { id = item.ID_Alumno }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_Alumno }, new { @class = "btn btn-danger" })
+    </td>
+</tr>
     }
 
 </table>

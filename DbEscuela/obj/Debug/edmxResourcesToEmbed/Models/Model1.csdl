@@ -11,9 +11,35 @@
     <Property Name="ApellidoMaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Activo" Type="Boolean" />
     <Property Name="FechaDeNacimiento" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ID_CARRERA" Type="Int32" />
+    <NavigationProperty Name="Tb_Carrera" Relationship="Self.FK__Tb_Alumno__ID_CA__5CD6CB2B" FromRole="Tb_Alumno" ToRole="Tb_Carrera" />
   </EntityType>
-  <EntityContainer Name="DbModel" annotation:LazyLoadingEnabled="true">
+  <EntityType Name="Tb_Carrera">
+    <Key>
+      <PropertyRef Name="ID_Carrera" />
+    </Key>
+    <Property Name="ID_Carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Tb_Alumno" Relationship="Self.FK__Tb_Alumno__ID_CA__5CD6CB2B" FromRole="Tb_Carrera" ToRole="Tb_Alumno" />
+  </EntityType>
+  <Association Name="FK__Tb_Alumno__ID_CA__5CD6CB2B">
+    <End Role="Tb_Carrera" Type="Self.Tb_Carrera" Multiplicity="0..1" />
+    <End Role="Tb_Alumno" Type="Self.Tb_Alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Carrera">
+        <PropertyRef Name="ID_Carrera" />
+      </Principal>
+      <Dependent Role="Tb_Alumno">
+        <PropertyRef Name="ID_CARRERA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbModel1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Tb_Alumno" EntityType="Self.Tb_Alumno" />
+    <EntitySet Name="Tb_Carrera" EntityType="Self.Tb_Carrera" />
+    <AssociationSet Name="FK__Tb_Alumno__ID_CA__5CD6CB2B" Association="Self.FK__Tb_Alumno__ID_CA__5CD6CB2B">
+      <End Role="Tb_Carrera" EntitySet="Tb_Carrera" />
+      <End Role="Tb_Alumno" EntitySet="Tb_Alumno" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

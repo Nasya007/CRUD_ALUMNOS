@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DbEscuelaModelStoreContainer" CdmEntityContainer="DbModel">
+  <EntityContainerMapping StorageEntityContainer="DbEscuelaModelStoreContainer" CdmEntityContainer="DbModel1">
     <EntitySetMapping Name="Tb_Alumno">
       <EntityTypeMapping TypeName="DbEscuelaModel.Tb_Alumno">
         <MappingFragment StoreEntitySet="Tb_Alumno">
@@ -11,6 +11,14 @@
           <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="FechaDeNacimiento" ColumnName="FechaDeNacimiento" />
+          <ScalarProperty Name="ID_CARRERA" ColumnName="ID_CARRERA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tb_Carrera">
+      <EntityTypeMapping TypeName="DbEscuelaModel.Tb_Carrera">
+        <MappingFragment StoreEntitySet="Tb_Carrera">
+          <ScalarProperty Name="ID_Carrera" ColumnName="ID_Carrera" />
           <ScalarProperty Name="Carrera" ColumnName="Carrera" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -11,9 +11,33 @@
     <Property Name="ApellidoMaterno" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="FechaDeNacimiento" Type="datetime" Nullable="false" />
-    <Property Name="Carrera" Type="varchar" MaxLength="200" />
+    <Property Name="ID_CARRERA" Type="int" />
   </EntityType>
+  <EntityType Name="Tb_Carrera">
+    <Key>
+      <PropertyRef Name="ID_Carrera" />
+    </Key>
+    <Property Name="ID_Carrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Carrera" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Tb_Alumno__ID_CA__5CD6CB2B">
+    <End Role="Tb_Carrera" Type="Self.Tb_Carrera" Multiplicity="0..1" />
+    <End Role="Tb_Alumno" Type="Self.Tb_Alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Carrera">
+        <PropertyRef Name="ID_Carrera" />
+      </Principal>
+      <Dependent Role="Tb_Alumno">
+        <PropertyRef Name="ID_CARRERA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DbEscuelaModelStoreContainer">
     <EntitySet Name="Tb_Alumno" EntityType="Self.Tb_Alumno" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tb_Carrera" EntityType="Self.Tb_Carrera" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Tb_Alumno__ID_CA__5CD6CB2B" Association="Self.FK__Tb_Alumno__ID_CA__5CD6CB2B">
+      <End Role="Tb_Carrera" EntitySet="Tb_Carrera" />
+      <End Role="Tb_Alumno" EntitySet="Tb_Alumno" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

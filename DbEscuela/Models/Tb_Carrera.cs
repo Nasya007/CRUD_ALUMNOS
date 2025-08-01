@@ -12,17 +12,16 @@ namespace DbEscuela.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tb_Alumno
+    public partial class Tb_Carrera
     {
-        public int ID_Alumno { get; set; }
-        public string NoControl { get; set; }
-        public string Nombres { get; set; }
-        public string ApellidoPaterno { get; set; }
-        public string ApellidoMaterno { get; set; }
-        public Nullable<bool> Activo { get; set; }
-        public System.DateTime FechaDeNacimiento { get; set; }
-        public Nullable<int> ID_CARRERA { get; set; }
+        public Tb_Carrera()
+        {
+            this.Tb_Alumno = new HashSet<Tb_Alumno>();
+        }
     
-        public virtual Tb_Carrera Tb_Carrera { get; set; }
+        public int ID_Carrera { get; set; }
+        public string Carrera { get; set; }
+    
+        public virtual ICollection<Tb_Alumno> Tb_Alumno { get; set; }
     }
 }

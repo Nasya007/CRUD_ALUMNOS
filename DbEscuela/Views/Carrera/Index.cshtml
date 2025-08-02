@@ -20,20 +20,71 @@
         <th>Acciones</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ID_Carrera)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Carrera)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Carrera }, new { @class = "btn btn-warning" }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID_Carrera }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Carrera }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_Carrera)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Carrera)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info btn-detalles" data-id="@item.ID_Carrera">Detalles</button>
+                <button type="button" class="btn btn-warning btn-editar" data-id="@item.ID_Carrera">Editar </button>
+                <button type="button" class="btn btn-danger btn-borrar" data-id="@item.ID_Carrera">Eliminar </button>
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="detallesModalBody">
+                <!-- Aquí se cargan los detalles -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            // Manejar clic en botón de detalles
+            $('.btn-detalles').click(function() {
+                var idCarrera = $(this).data('id');
+
+                // Hacer petición AJAX para obtener los detalles
+                $.get('@Url.Action("Details", "Carrera")', { id: idCarrera }, function(data) {
+                    $('#detallesModalBody').html(data);
+                    $('#detallesModal').modal('show');
+                });
+            });
+        });
+
+        $(document).ready(function () {
+
+            $('.btn-editar').click(function() {
+                var idCarrera = $(this).data('id');
+
+                $.get('@Url.Action("Edit", "Carrera")', { id: idCarrera }, function(data) {
+                    $('#detallesModalBody').html(data);
+                    $('#detallesModal').modal('show');
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('.btn-borrar').click(function () {
+                var idCarrera = $(this).data('id');
+
+                $.get('@Url.Action("Delete", "Carrera")', { id: idCarrera }, function (data) {
+                    $('#detallesModalBody').html(data);
+                    $('#detallesModal').modal('show');
+                });
+            });
+        });
+    </script>
+}

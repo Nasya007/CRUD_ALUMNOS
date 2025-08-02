@@ -9,82 +9,81 @@
 <p>
     @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-success" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ID_Alumno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoControl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApellidoPaterno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApellidoMaterno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaDeNacimiento)
-        </th>
-        <th>
-            Carrera
-        </th>
-        <th>Acciones</th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID_Alumno)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoControl)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApellidoPaterno)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApellidoMaterno)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Activo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaDeNacimiento)
+                </th>
+                <th>
+                    Carrera
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID_Alumno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoControl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Activo)
+                    </td>
+                    <td>
+                        @item.FechaDeNacimiento.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tb_Carrera.Carrera)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-detalles" data-id="@item.ID_Alumno">Detalles</button>
+                        <button type="button" class="btn btn-warning btn-editar" data-id="@item.ID_Alumno">Editar </button>
+                        <button type="button" class="btn btn-danger btn-borrar" data-id="@item.ID_Alumno">Eliminar </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_Alumno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoControl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApellidoPaterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApellidoMaterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activo)
-            </td>
-            <td>
-                @item.FechaDeNacimiento.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tb_Carrera.Carrera)
-            </td>
-            <td>
-                <button type="button" class="btn btn-info btn-detalles" data-id="@item.ID_Alumno">
-                    Detalles
-                </button>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID_Alumno }, new { @class = "btn btn-warning" }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_Alumno }, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
-    }
-
-</table>
-
+</div>
 
 
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detallesModalLabel">Detalles del Alumno</h5>
-            </div>
             <div class="modal-body" id="detallesModalBody">
                 <!-- Aquí se cargan los detalles -->
             </div>
@@ -101,6 +100,29 @@
 
                 // Hacer petición AJAX para obtener los detalles
                 $.get('@Url.Action("Details", "Alumno")', { id: idAlumno }, function(data) {
+                    $('#detallesModalBody').html(data);
+                    $('#detallesModal').modal('show');
+                });
+            });
+        });
+
+        $(document).ready(function () {
+
+            $('.btn-editar').click(function() {
+                var idAlumno = $(this).data('id');
+
+                $.get('@Url.Action("Edit", "Alumno")', { id: idAlumno }, function(data) {
+                    $('#detallesModalBody').html(data);
+                    $('#detallesModal').modal('show');
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('.btn-borrar').click(function () {
+                var idAlumno = $(this).data('id');
+
+                $.get('@Url.Action("Delete", "Alumno")', { id: idAlumno }, function (data) {
                     $('#detallesModalBody').html(data);
                     $('#detallesModal').modal('show');
                 });

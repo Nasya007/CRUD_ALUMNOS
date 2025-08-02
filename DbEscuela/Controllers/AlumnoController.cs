@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -77,9 +78,15 @@ namespace DbEscuela.Controllers
         {
             using (DbModel1 context = new DbModel1())
             {
-                var alumno = context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault();
+                var alumno = context.Tb_Alumno.Include(a => a.Tb_Carrera).FirstOrDefault(x => x.ID_Alumno == id);
                 ViewBag.ID_CARRERA = new SelectList(context.Tb_Carrera.ToList(), "ID_Carrera", "Carrera", alumno.ID_CARRERA);
+                
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("Edit", alumno);
+                }
                 return View(alumno);
+
             }
         }
 
@@ -111,6 +118,12 @@ namespace DbEscuela.Controllers
                 var alumno = context.Tb_Alumno
                             .Include(a => a.Tb_Carrera)
                             .FirstOrDefault(x => x.ID_Alumno == id);
+
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("Delete", alumno);
+                }
+
                 return View(alumno);
             }
         }

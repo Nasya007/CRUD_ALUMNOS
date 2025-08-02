@@ -24,7 +24,14 @@ namespace DbEscuela.Controllers
         {
             using (DbModel1 context = new DbModel1())
             {
-                return View(context.Tb_Carrera.Where(x=>x.ID_Carrera == id).FirstOrDefault());
+                var carrera = context.Tb_Carrera.FirstOrDefault(x=>x.ID_Carrera == id);
+
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("Details", carrera);
+                }
+
+                return View(carrera);
             }
         }
 
@@ -59,7 +66,14 @@ namespace DbEscuela.Controllers
         {
             using (DbModel1 context = new DbModel1())
             {
-                return View(context.Tb_Carrera.Where(x=>x.ID_Carrera == id).FirstOrDefault());
+                var carrera = context.Tb_Carrera.FirstOrDefault(x => x.ID_Carrera == id);
+
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("Edit", carrera);
+                }
+
+                return View(carrera);
             }
         }
 
@@ -88,7 +102,14 @@ namespace DbEscuela.Controllers
         {
             using (DbModel1 context = new DbModel1())
             {
-                return View(context.Tb_Carrera.Where(x => x.ID_Carrera == id).FirstOrDefault());
+                var carrera = context.Tb_Carrera.FirstOrDefault(x => x.ID_Carrera == id);
+
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("Delete", carrera);
+                }
+
+                return View(carrera);
             }
         }
 

@@ -22,7 +22,6 @@ namespace DbEscuela.Models
         public Nullable<bool> Activo { get; set; }
         public System.DateTime FechaDeNacimiento { get; set; }
         public Nullable<int> ID_CARRERA { get; set; }
-    
         public virtual Tb_Carrera Tb_Carrera { get; set; }
     }
 }

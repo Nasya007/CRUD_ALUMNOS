@@ -6,76 +6,25 @@
 
 <h2>Detalles</h2>
 
-<div>
-    <h4>Alumno</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ID_Alumno)
-        </dt>
+    <dl class="row">
+        <dt class="col-sm-4">ID</dt>
+        <dd class="col-sm-8">@Model.ID_Alumno</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ID_Alumno)
-        </dd>
+        <dt class="col-sm-4">Nombre</dt>
+        <dd class="col-sm-8">@Model.Nombres @Model.ApellidoPaterno @Model.ApellidoMaterno</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NoControl)
-        </dt>
+        <dt class="col-sm-4">No. Control</dt>
+        <dd class="col-sm-8">@Model.NoControl</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NoControl)
-        </dd>
+        <dt class="col-sm-4">Activo</dt>
+        <dd class="col-sm-8">@Model.Activo</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombres)
-        </dt>
+        <dt class="col-sm-4">Nacimiento</dt>
+        <dd class="col-sm-8">@Model.FechaDeNacimiento.ToShortDateString()</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombres)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ApellidoPaterno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApellidoPaterno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ApellidoMaterno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApellidoMaterno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Activo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Activo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaDeNacimiento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaDeNacimiento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Carrera)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Carrera)
-        </dd>
-
+        <dt class="col-sm-4">Carrera</dt>
+        <dd class="col-sm-8">@Model.Tb_Carrera.Carrera</dd>
     </dl>
-</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Alumno }) |
     @Html.ActionLink("Back to List", "Index")

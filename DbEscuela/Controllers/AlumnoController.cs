@@ -26,7 +26,16 @@ namespace DbEscuela.Controllers
         {
             using (DbModel1 context = new DbModel1())
             {
-                return View(context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault());
+                var alumno = context.Tb_Alumno
+                            .Include(a => a.Tb_Carrera)
+                            .FirstOrDefault(x => x.ID_Alumno == id);
+
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("Details", alumno);
+                }
+
+                return View(alumno);
             }
 
         }
@@ -99,7 +108,10 @@ namespace DbEscuela.Controllers
         {
             using (DbModel1 context = new DbModel1())
             {
-                return View(context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault());
+                var alumno = context.Tb_Alumno
+                            .Include(a => a.Tb_Carrera)
+                            .FirstOrDefault(x => x.ID_Alumno == id);
+                return View(alumno);
             }
         }
 
@@ -111,7 +123,7 @@ namespace DbEscuela.Controllers
             {
                 using (DbModel1 context = new DbModel1())
                 {
-                    Tb_Alumno tb_Alumno = context.Tb_Alumno.Where(x => x.ID_Alumno == id).FirstOrDefault();
+                    Tb_Alumno tb_Alumno = context.Tb_Alumno.Include(a => a.Tb_Carrera).FirstOrDefault(x => x.ID_Alumno == id);
                     context.Tb_Alumno.Remove(tb_Alumno);
                     context.SaveChanges();
                 }

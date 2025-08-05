@@ -23,7 +23,8 @@ namespace DbEscuela.Controllers
         }
 
         // GET: Alumno/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public PartialViewResult Details(int id)
         {
             using (DbModel1 context = new DbModel1())
             {
@@ -31,12 +32,7 @@ namespace DbEscuela.Controllers
                             .Include(a => a.Tb_Carrera)
                             .FirstOrDefault(x => x.ID_Alumno == id);
 
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("Details", alumno);
-                }
-
-                return View(alumno);
+                return PartialView("Details", alumno);
             }
 
         }
@@ -74,18 +70,15 @@ namespace DbEscuela.Controllers
         }
 
         // GET: Alumno/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public PartialViewResult Edit(int id)
         {
             using (DbModel1 context = new DbModel1())
             {
                 var alumno = context.Tb_Alumno.Include(a => a.Tb_Carrera).FirstOrDefault(x => x.ID_Alumno == id);
                 ViewBag.ID_CARRERA = new SelectList(context.Tb_Carrera.ToList(), "ID_Carrera", "Carrera", alumno.ID_CARRERA);
-                
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("Edit", alumno);
-                }
-                return View(alumno);
+
+                return PartialView("Edit", alumno);
 
             }
         }
@@ -111,7 +104,8 @@ namespace DbEscuela.Controllers
         }
 
         // GET: Alumno/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public PartialViewResult Delete(int id)
         {
             using (DbModel1 context = new DbModel1())
             {
@@ -119,12 +113,7 @@ namespace DbEscuela.Controllers
                             .Include(a => a.Tb_Carrera)
                             .FirstOrDefault(x => x.ID_Alumno == id);
 
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("Delete", alumno);
-                }
-
-                return View(alumno);
+                return PartialView("Delete", alumno);
             }
         }
 

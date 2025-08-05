@@ -67,7 +67,28 @@
     <div class="form-group">
         <div class="col-md-8">
             <label class="form-label fw-bold">Carrera</label>
-            @Html.DropDownListFor( model => model.ID_CARRERA, ViewBag.ID_CARRERA as SelectList, new { @class = "form-control" })
+            @{
+                var carreras = ViewBag.ID_CARRERA as SelectList ?? new SelectList(new List<string>());
+                var selectedValue = Model?.ID_CARRERA?.ToString() ?? "";
+            }
+
+            <select name="ID_CARRERA" id="ID_CARRERA" class="form-control">
+                @if (carreras.Any())
+                {
+                    foreach (var item in carreras)
+                    {
+                        <option value="@item.Value"
+                                @(item.Value == selectedValue ? "selected" : "")>
+                            @item.Text
+                        </option>
+                    }
+                }
+                else
+                {
+                    <option value="">No hay carreras disponibles</option>
+                }
+            </select>
+
         </div>
     </div>
 

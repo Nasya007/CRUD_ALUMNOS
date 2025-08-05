@@ -54,11 +54,9 @@
         $(document).ready(function() {
             // Manejar clic en botón de detalles
             $('.btn-detalles').click(function() {
-                var idCarrera = $(this).data('id');
+                var idAlumno = $(this).data('id');
 
-                // Hacer petición AJAX para obtener los detalles
-                $.get('@Url.Action("Details", "Carrera")', { id: idCarrera }, function(data) {
-                    $('#detallesModalBody').html(data);
+                $('#detallesModalBody').load('@Url.Action("Details", "Alumno")', { id: idAlumno }, function() {
                     $('#detallesModal').modal('show');
                 });
             });
@@ -67,10 +65,9 @@
         $(document).ready(function () {
 
             $('.btn-editar').click(function() {
-                var idCarrera = $(this).data('id');
+                var idAlumno = $(this).data('id');
 
-                $.get('@Url.Action("Edit", "Carrera")', { id: idCarrera }, function(data) {
-                    $('#detallesModalBody').html(data);
+                $('#detallesModalBody').load('@Url.Action("Edit", "Alumno")', { id: idAlumno }, function() {
                     $('#detallesModal').modal('show');
                 });
             });
@@ -78,10 +75,9 @@
 
         $(document).ready(function () {
             $('.btn-borrar').click(function () {
-                var idCarrera = $(this).data('id');
+                var idAlumno = $(this).data('id');
 
-                $.get('@Url.Action("Delete", "Carrera")', { id: idCarrera }, function (data) {
-                    $('#detallesModalBody').html(data);
+                $('#detallesModalBody').load('@Url.Action("Delete", "Alumno")', { id: idAlumno }, function() {
                     $('#detallesModal').modal('show');
                 });
             });

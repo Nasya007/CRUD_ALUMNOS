@@ -127,11 +127,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlumnoController.cs" />
+    <Compile Include="Controllers\AlumnosController.cs" />
     <Compile Include="Controllers\CarreraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Alumno.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -218,6 +220,7 @@
     <Content Include="Views\Carrera\Details.cshtml" />
     <Content Include="Views\Carrera\Edit.cshtml" />
     <Content Include="Views\Carrera\Delete.cshtml" />
+    <Content Include="Views\Alumnos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

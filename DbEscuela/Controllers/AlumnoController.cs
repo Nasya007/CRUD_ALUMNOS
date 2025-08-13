@@ -79,7 +79,6 @@ namespace DbEscuela.Controllers
                 ViewBag.ID_CARRERA = new SelectList(context.Tb_Carrera.ToList(), "ID_Carrera", "Carrera", alumno.ID_CARRERA);
 
                 return PartialView("Edit", alumno);
-
             }
         }
 
@@ -101,6 +100,35 @@ namespace DbEscuela.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public JsonResult ActualizarCarrera(int id, int id_carrera)
+        {
+            bool success = false;
+            string message = string.Empty;
+
+            try
+            {
+                using (DbModel1 context = new DbModel1())
+                {
+                    Tb_Alumno alumno = context.Tb_Alumno.Find(id);
+                    Tb_Carrera carrera = context.Tb_Carrera.Find(id_carrera);
+
+                    alumno.ID_CARRERA = id_carrera;
+                    context.Entry(alumno).State = EntityState.Modified;
+                    context.SaveChanges();
+
+                    success = true;
+                }
+            } 
+            catch (Exception)
+            {
+                message = $"Error al actualizar";
+                success = false;
+            }
+
+            return Json(new { Success = success, Message = message }, JsonRequestBehavior.DenyGet);
         }
 
         // GET: Alumno/Delete/5

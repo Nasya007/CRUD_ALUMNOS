@@ -15,5 +15,6 @@ namespace DbEscuela.Models
         public bool Activo { get; set; }
         public DateTime FechaDeNacimiento { get; set; }
         public string Carrera { get; set; }
+        public int ID_CARRERA { get; set; }
     }
 }

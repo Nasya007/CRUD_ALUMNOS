@@ -1,0 +1,60 @@
+﻿<style>
+    .lienzo {
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .fila {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .cuadro {
+        width: 90px;
+        aspect-ratio: 1;
+        border: 2px solid black;
+        box-sizing: border-box;
+    }
+
+    @@media (max-width: 500px) {
+        .cuadro {
+            width: 70px;
+        }
+        .lienzo {
+            gap: 20px;
+        }
+        .fila {
+            gap: 20px;
+        }
+    }
+</style>
+<h3>Juego</h3>
+<div class="lienzo">
+    <div class="fila">
+        <div class="cuadro"></div>
+    </div>
+    <div class="fila">
+        <div class="cuadro"></div>
+    </div>
+    <div class="fila">
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+    </div>
+</div>
+
+
+<script>
+    var aleatorio = Math.floor(Math.random() * 3) + 1;
+
+    $(function () {
+        console.log(aleatorio);
+    });
+</script>

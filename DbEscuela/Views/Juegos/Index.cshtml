@@ -27,9 +27,11 @@
         .cuadro {
             width: 70px;
         }
+
         .lienzo {
             gap: 20px;
         }
+
         .fila {
             gap: 20px;
         }
@@ -44,17 +46,37 @@
         <div class="cuadro"></div>
     </div>
     <div class="fila">
-        <div class="cuadro"></div>
-        <div class="cuadro"></div>
-        <div class="cuadro"></div>
+        <div class="cuadro" id="btn-uno" onclick="miFuncion(1)"></div>
+        <div class="cuadro" id="btn-dos" onclick="miFuncion(2)"></div>
+        <div class="cuadro" id="btn-tres" onclick="miFuncion(3)"></div>
     </div>
 </div>
 
+@section scripts {
+    <script>
+        var aleatorio = Math.floor(Math.random() * 3) + 1;
 
-<script>
-    var aleatorio = Math.floor(Math.random() * 3) + 1;
+        $(function () {
+            console.log(aleatorio);
+        });
 
-    $(function () {
-        console.log(aleatorio);
-    });
-</script>
+        $(document).ready(function () {
+            $('#btn-uno').click(function () {
+                console.log("Cuadro 1");
+            })
+
+            $('#btn-dos').click(function () {
+                console.log("Cuadro 2");
+            })
+
+            $('#btn-tres').click(function () {
+                console.log("Cuadro 3");
+            })
+        });
+
+        function miFuncion(num) {
+            debugger;
+            console.log("Se hizo clic en el botón " + num);
+        }
+    </script>
+}

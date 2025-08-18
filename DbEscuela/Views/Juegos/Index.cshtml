@@ -40,15 +40,23 @@
 <h3>Juego</h3>
 <div class="lienzo">
     <div class="fila">
-        <div class="cuadro"></div>
+        <div class="cuadro">
+            <img src="~/Images/negro.png" alt="Piedra" style="width:100%; height:100%; object-fit:contain;" />
+        </div>
     </div>
     <div class="fila">
-        <div class="cuadro"></div>
+        <div class="cuadro" id="cuadro-selec"></div>
     </div>
     <div class="fila">
-        <div class="cuadro" id="btn-uno" onclick="miFuncion(1)"></div>
-        <div class="cuadro" id="btn-dos" onclick="miFuncion(2)"></div>
-        <div class="cuadro" id="btn-tres" onclick="miFuncion(3)"></div>
+        <div class="cuadro" id="btn-uno" onclick="miFuncion(1)">
+            <img src="~/Images/piedra.jpg" alt="Piedra" style="width:100%; height:100%; object-fit:contain;" />
+        </div>
+        <div class="cuadro" id="btn-dos" onclick="miFuncion(2)">
+            <img src="~/Images/papel.jpg" alt="Papel" style="width:100%; height:100%; object-fit:contain;" />
+        </div>
+        <div class="cuadro" id="btn-tres" onclick="miFuncion(3)">
+            <img src="~/Images/tijera.png" alt="Tijera" style="width:100%; height:100%; object-fit:contain;" />
+        </div>
     </div>
 </div>
 
@@ -76,7 +84,18 @@
 
         function miFuncion(num) {
             debugger;
-            console.log("Se hizo clic en el botón " + num);
+            var imagenes = {
+                1: "@Url.Content("~/Images/piedra.jpg")",  //Url.Content("~") generá la ruta correcta
+                2: "@Url.Content("~/Images/papel.jpg")",
+                3: "@Url.Content("~/Images/tijera.png")"
+            }
+            console.log("Se hizo clic en el botón " + imagenes[num]);
+
+            $("#cuadro-selec").css({
+                "background-image": "url('" + imagenes[num] + "')",
+                "background-size": "cover",
+                "background-position": "center"
+            });
         }
     </script>
 }

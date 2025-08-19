@@ -36,12 +36,38 @@
             gap: 20px;
         }
     }
+
+    .mensaje {
+        margin-top: 20px;
+        padding: 15px 25px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 18px;
+        display: none; /* oculto al inicio */
+    }
+
+        .mensaje.ganar {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .mensaje.perder {
+            background-color: #F44336;
+            color: white;
+        }
+
+        .mensaje.empate {
+            background-color: #FFC107;
+            color: black;
+        }
+
 </style>
-<h3>Juego</h3>
+
 <div class="lienzo">
+    <h3 class="center">Piedra, Papel y Tijera</h3>
     <div class="fila">
-        <div class="cuadro">
-            <img src="~/Images/negro.png" alt="Piedra" style="width:100%; height:100%; object-fit:contain;" />
+        <div class="cuadro" id="cuadro-ale">
         </div>
     </div>
     <div class="fila">
@@ -59,14 +85,11 @@
         </div>
     </div>
 </div>
+<div id="mensaje" class="mensaje"></div>
+
 
 @section scripts {
     <script>
-        var aleatorio = Math.floor(Math.random() * 3) + 1;
-
-        $(function () {
-            console.log(aleatorio);
-        });
 
         $(document).ready(function () {
             $('#btn-uno').click(function () {
@@ -83,19 +106,43 @@
         });
 
         function miFuncion(num) {
+            var aleatorio = Math.floor(Math.random() * 3) + 1;
             debugger;
+
             var imagenes = {
                 1: "@Url.Content("~/Images/piedra.jpg")",  //Url.Content("~") generá la ruta correcta
                 2: "@Url.Content("~/Images/papel.jpg")",
                 3: "@Url.Content("~/Images/tijera.png")"
             }
-            console.log("Se hizo clic en el botón " + imagenes[num]);
 
             $("#cuadro-selec").css({
                 "background-image": "url('" + imagenes[num] + "')",
                 "background-size": "cover",
                 "background-position": "center"
             });
+
+            $("#cuadro-ale").css({
+                "background-image": "url('" + imagenes[aleatorio] + "')",
+                "background-size": "cover",
+                "background-position": "center"
+            });
+
+            setTimeout(function () {
+                let mensaje = $("#mensaje");
+                mensaje.removeClass("ganar perder empate"); // limpiar estilos previos
+
+                if (num === aleatorio) {
+                    //addClass para aplicar el estilo correcto y text para cambiar el mensaje.
+                    mensaje.addClass("empate").text("¡Empate!").fadeIn();   //fadeIn animación suave
+                } else if ((num === 1 && aleatorio === 3) || (num === 2 && aleatorio === 1) || (num === 3 && aleatorio === 2)) {
+                    mensaje.addClass("ganar").text("🎉 ¡Ganaste!").fadeIn();
+                } else {
+                    mensaje.addClass("perder").text("😢 Perdiste").fadeIn();
+                }
+
+                setTimeout(() => mensaje.fadeOut(), 2000);
+
+            }, 500);
         }
     </script>
 }

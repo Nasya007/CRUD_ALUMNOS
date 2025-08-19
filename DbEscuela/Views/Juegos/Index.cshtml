@@ -61,11 +61,10 @@
             background-color: #FFC107;
             color: black;
         }
-
 </style>
-
+<h3 class="center">Piedra, Papel y Tijera</h3>
 <div class="lienzo">
-    <h3 class="center">Piedra, Papel y Tijera</h3>
+    <p>Jugador: <span id="puntosJugador">0</span> - CPU: <span id="puntosCPU">0</span></p>
     <div class="fila">
         <div class="cuadro" id="cuadro-ale">
         </div>
@@ -74,39 +73,66 @@
         <div class="cuadro" id="cuadro-selec"></div>
     </div>
     <div class="fila">
-        <div class="cuadro" id="btn-uno" onclick="miFuncion(1)">
+        <div class="cuadro" @*id="btn-uno"*@ onclick="miFuncion(1)">
             <img src="~/Images/piedra.jpg" alt="Piedra" style="width:100%; height:100%; object-fit:contain;" />
         </div>
-        <div class="cuadro" id="btn-dos" onclick="miFuncion(2)">
+        <div class="cuadro" @*id="btn-dos"*@ onclick="miFuncion(2)">
             <img src="~/Images/papel.jpg" alt="Papel" style="width:100%; height:100%; object-fit:contain;" />
         </div>
-        <div class="cuadro" id="btn-tres" onclick="miFuncion(3)">
+        <div class="cuadro" @*id="btn-tres"*@ onclick="miFuncion(3)">
             <img src="~/Images/tijera.png" alt="Tijera" style="width:100%; height:100%; object-fit:contain;" />
         </div>
     </div>
+    <div id="mensaje" class="mensaje"></div>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="button" class="btn btn-primary btn-lg" id="Contador">Inicio</button>
+    </div>
 </div>
-<div id="mensaje" class="mensaje"></div>
 
+<div class="modal fade" id="resultadoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title" id="resultadoTexto"></h5></div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script>
+        let puntosJugador = 0;
+        let puntosCPU = 0;
+        let juegoTerminado = false;
 
-        $(document).ready(function () {
-            $('#btn-uno').click(function () {
-                console.log("Cuadro 1");
-            })
+        function actualizarMarcador() {
+            $("#puntosJugador").text(puntosJugador);
+            $("#puntosCPU").text(puntosCPU);
+        }
+        actualizarMarcador();
 
-            $('#btn-dos').click(function () {
-                console.log("Cuadro 2");
-            })
+        //$(document).ready(function () {
+        //    $('#btn-uno').click(function () {
+        //        console.log("Cuadro 1");
+        //    })
 
-            $('#btn-tres').click(function () {
-                console.log("Cuadro 3");
-            })
-        });
+        //    $('#btn-dos').click(function () {
+        //        console.log("Cuadro 2");
+        //    })
+
+        //    $('#btn-tres').click(function () {
+        //        console.log("Cuadro 3");
+        //    })
+        //});
+
+        function mostrarModal(texto) {
+            $("#resultadoTexto").text(texto);
+            $("#resultadoModal").modal("show");
+        }
+
 
         function miFuncion(num) {
-            var aleatorio = Math.floor(Math.random() * 3) + 1;
+            if (juegoTerminado) return;
+
+            let aleatorio = Math.floor(Math.random() * 3) + 1;
             debugger;
 
             var imagenes = {
@@ -128,7 +154,7 @@
             });
 
             setTimeout(function () {
-                let mensaje = $("#mensaje");
+                const mensaje = $("#mensaje");
                 mensaje.removeClass("ganar perder empate"); // limpiar estilos previos
 
                 if (num === aleatorio) {
@@ -136,13 +162,39 @@
                     mensaje.addClass("empate").text("¡Empate!").fadeIn();   //fadeIn animación suave
                 } else if ((num === 1 && aleatorio === 3) || (num === 2 && aleatorio === 1) || (num === 3 && aleatorio === 2)) {
                     mensaje.addClass("ganar").text("🎉 ¡Ganaste!").fadeIn();
+                    puntosJugador++;
                 } else {
                     mensaje.addClass("perder").text("😢 Perdiste").fadeIn();
+                    puntosCPU++;
+                }
+
+                actualizarMarcador();
+
+                if (puntosJugador === 5) {
+                    juegoTerminado = true;
+                    $("#Contador").text("Reiniciar");
+                    mostrarModal("¡GANASTE :)!");
+                    $("#Contador").text("Reiniciar");
+                } else if (puntosCPU === 5) {
+                    juegoTerminado = true;
+                    $("#Contador").text("Reiniciar");
+                    mostrarModal("¡PERDISTE :(!");
                 }
 
                 setTimeout(() => mensaje.fadeOut(), 2000);
 
-            }, 500);
+            }, 400);
         }
+
+        $("#Contador").click(function () {
+            if (juegoTerminado) {
+                puntosJugador = 0;
+                puntosCPU = 0;
+                juegoTerminado = false;
+                actualizarMarcador();
+                $(this).text("Inicio");
+                $("#cuadro-ale, #cuadro-selec").css("background-image", "none");
+            }
+        });
     </script>
 }

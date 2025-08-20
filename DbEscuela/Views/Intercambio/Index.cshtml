@@ -1,0 +1,49 @@
+﻿
+<h2 class="text-center mb-4">🎁 Intercambio</h2>
+
+<button class="btn btn-info btn-md shadow-sm btn-cambio">Agregar participante</button>
+
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+            <div class="modal-header bg-gradient text-white rounded-top-4">
+                <h4 class="modal-title fw-bold" id="detallesModalLabel">Agregar Participante</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formParticipante" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label fw-semibold">Nombre</label>
+                        <input type="text" class="form-control form-control-lg" id="nombre" placeholder="Ingresa el nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="grupo" class="form-label fw-semibold">Grupo</label>
+                        <input type="text" class="form-control form-control-lg" id="grupo" placeholder="Ejemplo: A, B, C" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="regalo" class="form-label fw-semibold">Regalo</label>
+                        <textarea class="form-control form-control-lg" id="regalo" rows="3" placeholder="Escribe qué regalo te gustaría recibir" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold">Correo electrónico</label>
+                        <input type="email" class="form-control form-control-lg" id="email" placeholder="nombre@correo.com" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="formParticipante" class="btn btn-success px-4 fw-bold">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.btn-cambio').click(function () {
+                $('#detallesModal').modal('show');
+            });
+        });
+    </script>
+} 

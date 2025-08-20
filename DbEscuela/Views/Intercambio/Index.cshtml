@@ -3,6 +3,21 @@
 
 <button class="btn btn-info btn-md shadow-sm btn-cambio">Agregar participante</button>
 
+<div class="table-responsive">
+    <hr />
+    <table id="participantes" class="table table-hover align-middle table-bordered shadow-sm rounded-4 overflow-hidden">
+        <thead class="table-primary text-center">
+            <tr>
+                <th>Nombre</th>
+                <th>Grupo</th>
+                <th>Deseo de Regalo</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody class="table-light text-center"></tbody>
+    </table>
+</div>
+
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg border-0 rounded-4">
@@ -31,7 +46,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" form="formParticipante" class="btn btn-success px-4 fw-bold">Guardar</button>
+                <button type="button" onclick="agregarParticipante()" form="formParticipante" class="btn btn-success px-4 fw-bold">Guardar</button>
             </div>
         </div>
     </div>
@@ -41,9 +56,39 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $('.btn-cambio').click(function () {
-                $('#detallesModal').modal('show');
-            });
+            
         });
+
+        $('.btn-cambio').click(function () {
+            $('#detallesModal').modal('show');
+        });
+
+
+        function agregarParticipante() {
+            // Obtener valores
+            const nombre = document.getElementById("nombre").value;
+            const grupo = document.getElementById("grupo").value;
+            const regalo = document.getElementById("regalo").value;
+            const email = document.getElementById("email").value;
+
+            // Obtener la tabla y el cuerpo de la tabla
+            const tabla = document.getElementById("participantes").getElementsByTagName('tbody')[0];
+            const nuevaFila = tabla.insertRow();
+
+            // Crear la celda
+            const celdaNombre = nuevaFila.insertCell(0);
+            const celdaGrupo = nuevaFila.insertCell(1);
+            const celdaRegalo = nuevaFila.insertCell(2);
+            const celdaEmail = nuevaFila.insertCell(3);
+
+            //Insertar valores
+            celdaNombre.textContent = nombre;
+            celdaGrupo.textContent = grupo;
+            celdaRegalo.textContent = regalo;
+            celdaEmail.textContent = email;
+
+            $('#detallesModal').modal('hide');
+            $('#formParticipante')[0].reset();
+        }
     </script>
 } 

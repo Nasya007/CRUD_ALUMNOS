@@ -12,6 +12,7 @@
                 <th>Grupo</th>
                 <th>Deseo de Regalo</th>
                 <th>Email</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody class="table-light text-center"></tbody>
@@ -55,10 +56,6 @@
 
 @section scripts{
     <script>
-        $(document).ready(function () {
-            
-        });
-
         $('.btn-cambio').click(function () {
             $('#detallesModal').modal('show');
         });
@@ -80,12 +77,20 @@
             const celdaGrupo = nuevaFila.insertCell(1);
             const celdaRegalo = nuevaFila.insertCell(2);
             const celdaEmail = nuevaFila.insertCell(3);
+            const celdaEliminar = nuevaFila.insertCell(4);
 
             //Insertar valores
             celdaNombre.textContent = nombre;
             celdaGrupo.textContent = grupo;
             celdaRegalo.textContent = regalo;
             celdaEmail.textContent = email;
+            celdaEliminar.innerHTML = "";
+
+            celdaEliminar.innerHTML = `<button class="btn btn-danger btn-sm">Eliminar</button>`;
+
+            celdaEliminar.addEventListener("click", function () {
+                this.closest("tr").remove();
+            });
 
             $('#detallesModal').modal('hide');
             $('#formParticipante')[0].reset();

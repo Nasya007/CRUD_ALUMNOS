@@ -60,7 +60,7 @@
             $('#detallesModal').modal('show');
         });
 
-
+        const participantes = [];
         function agregarParticipante() {
             // Obtener valores
             const nombre = document.getElementById("nombre").value;
@@ -88,6 +88,29 @@
 
             celdaEliminar.innerHTML = `<button class="btn btn-danger btn-sm">Eliminar</button>`;
 
+            const participante = {
+                Nombre: nombre,
+                Grupo: grupo,
+                Regalo: regalo,
+                Email: email
+            };
+            participantes.push(participante);
+
+            $.ajax({
+                url: '@Url.Action("GuardarParticipantes", "Intercambio")',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(participantes),
+                success: function (response) {
+                    console.log("Guardado con éxito", response);
+                },
+                error: function (err) {
+                    console.error("Error:", err);
+                }
+            });
+
+
+            console.log(participantes);
             celdaEliminar.addEventListener("click", function () {
                 this.closest("tr").remove();
             });

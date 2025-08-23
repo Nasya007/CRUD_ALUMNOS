@@ -11,5 +11,6 @@ namespace DbEscuela.Models
         public string Grupo { get; set; }
         public string Regalo { get; set; }
         public string Email { get; set; }
+        public string AmigoSecreto { get; set; }
     }
 }

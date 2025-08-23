@@ -18,6 +18,7 @@
         <tbody class="table-light text-center"></tbody>
     </table>
 </div>
+<button id="btnEnviarCorreos" class="btn btn-primary">Enviar Correos</button>
 
 <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -109,8 +110,6 @@
                 }
             });
 
-
-            console.log(participantes);
             celdaEliminar.addEventListener("click", function () {
                 this.closest("tr").remove();
             });
@@ -118,5 +117,18 @@
             $('#detallesModal').modal('hide');
             $('#formParticipante')[0].reset();
         }
+
+        $("#btnEnviarCorreos").click(function () {
+            $.ajax({
+                url: '@Url.Action("EnviarCorreos", "Intercambio")',
+                type: "POST",
+                success: function (data) {
+                    alert(data.message);
+                },
+                error: function () {
+                    alert("Ocurrió un error al enviar los correos.");
+                }
+            });
+        });
     </script>
 } 
